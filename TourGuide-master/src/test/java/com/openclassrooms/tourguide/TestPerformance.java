@@ -51,7 +51,7 @@ public class TestPerformance {
 	public void highVolumeTrackLocation() throws ExecutionException, InterruptedException {
 		GpsUtil gpsUtil = new GpsUtil();
 		RewardsService rewardsService = new RewardsService(gpsUtil, new RewardCentral());
-		// Users should be incremented up to 100,000, and test finishes within 15minutes
+		// Le nombre d'utilisateurs devrait être augmenté jusqu'à 100 000, et le test doit être terminé en moins de 15 minutes
 		InternalTestHelper.setInternalUserNumber(10000);
 		TourGuideService tourGuideService = new TourGuideService(gpsUtil, rewardsService);
 
@@ -81,7 +81,7 @@ public class TestPerformance {
 		GpsUtil gpsUtil = new GpsUtil();
 		RewardsService rewardsService = new RewardsService(gpsUtil, new RewardCentral());
 
-		// Users should be incremented up to 100,000, and test finishes within 20minutes
+		// Le nombre d'utilisateurs devrait être augmenté jusqu'à 100 000, et le test doit être terminé en moins de 20 minutes
 		InternalTestHelper.setInternalUserNumber(10000);
 		TourGuideService tourGuideService = new TourGuideService(gpsUtil, rewardsService);
 

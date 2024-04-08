@@ -1,22 +1,29 @@
 package com.openclassrooms.tourguide.model;
 
-
+/**
+ * Classe représentant une attraction touristique proche.
+ * Cette classe contient les informations sur une attraction touristique à proximité, y compris son nom,
+ * sa latitude et sa longitude, ainsi que la latitude et la longitude de l'utilisateur, la distance entre
+ * l'utilisateur et l'attraction, et les points de récompense pour avoir visité l'attraction.
+ */
 
 public class NearbyAttraction {
-    // Name of Tourist attraction,
+    // Nom de l'attraction touristique,
     private String name;
-    // Tourist attractions lat/long,
+    // Latitude/Longitude de l'attraction touristique
     private double attractionLatitude;
     private double attractionLongitude;
 
-    // The user's location lat/long,
+    // Latitude/Longitude de l'utilisateur
     private double userLatitude;
-    private double userLongitude;
-    // The distance in miles between the user's location and each of the attractions.
-    private double distance;
-    // The reward points for visiting each Attraction.
-    private int rewards;
 
+    // Distance en miles entre la position de l'utilisateur et chaque attraction
+    private double userLongitude;
+    // Distance en miles entre la position de l'utilisateur et chaque attraction
+    private double distance;
+    // Points de récompense pour la visite de l'attraction
+    private int rewards;
+    //Constructeur de la classe NearbyAttraction.
     public NearbyAttraction(String name,
                             double attractionLatitude,
                             double attractionLongitude,

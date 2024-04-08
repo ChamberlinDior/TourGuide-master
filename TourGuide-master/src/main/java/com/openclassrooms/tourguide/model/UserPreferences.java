@@ -1,5 +1,10 @@
 package com.openclassrooms.tourguide.model;
 
+/**
+ * Classe représentant les préférences d'un utilisateur de l'application TourGuide.
+ * Ces préférences incluent la proximité des attractions, la durée du voyage, la quantité de billets, le nombre d'adultes
+ * et le nombre d'enfants.
+ */
 public class UserPreferences {
 	
 	private int attractionProximity = Integer.MAX_VALUE;

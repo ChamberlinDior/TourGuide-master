@@ -7,7 +7,12 @@ import java.util.UUID;
 
 import gpsUtil.location.VisitedLocation;
 import tripPricer.Provider;
-
+/**
+ * Classe représentant un utilisateur de l'application TourGuide.
+ * Cette classe contient les informations sur un utilisateur, telles que son identifiant unique, son nom d'utilisateur,
+ * son numéro de téléphone, son adresse e-mail, ses emplacements visités, ses récompenses, ses préférences utilisateur,
+ * ses offres de voyage, etc.
+ */
 public class User {
 	private final UUID userId;
 	private final String userName;

@@ -27,7 +27,11 @@ import gpsUtil.location.VisitedLocation;
 
 import tripPricer.Provider;
 import tripPricer.TripPricer;
-
+/**
+ * Cette classe est responsable de la gestion des services de l'application TourGuide.
+ * Elle offre des fonctionnalités telles que le suivi de la localisation des utilisateurs, le calcul des récompenses,
+ * la recherche d'attractions à proximité, etc.
+ */
 @Service
 public class TourGuideService {
 	private Logger logger = LoggerFactory.getLogger(TourGuideService.class);
@@ -42,6 +46,13 @@ public class TourGuideService {
 	public void shutdownExecutorService() {
 		executorService.shutdown();
 	}
+
+	/**
+	 * Constructeur de TourGuideService.
+	 *
+	 * @param gpsUtil        L'utilitaire GPS utilisé pour obtenir les localisations et attractions.
+	 * @param rewardsService Le service de récompenses utilisé pour calculer les récompenses des utilisateurs.
+	 */
 	public TourGuideService(GpsUtil gpsUtil, RewardsService rewardsService) {
 		this.gpsUtil = gpsUtil;
 		this.rewardsService = rewardsService;
@@ -58,20 +69,46 @@ public class TourGuideService {
 		addShutDownHook();
 	}
 
+	/**
+	 * Méthode permettant d'obtenir les récompenses d'un utilisateur.
+	 *
+	 * @param user L'utilisateur pour lequel obtenir les récompenses.
+	 * @return La liste des récompenses de l'utilisateur.
+	 */
 	public List<UserReward> getUserRewards(User user) {
 		return user.getUserRewards();
 	}
 
+
+	/**
+	 * Méthode permettant d'obtenir la localisation d'un utilisateur.
+	 *
+	 * @param user L'utilisateur pour lequel obtenir la localisation.
+	 * @return La localisation de l'utilisateur.
+	 */
 	public VisitedLocation getUserLocation(User user) {
 		VisitedLocation visitedLocation = (user.getVisitedLocations().size() > 0) ? user.getLastVisitedLocation()
 				: trackUserLocation(user);
 		return visitedLocation;
 	}
 
+
+	/**
+	 * Méthode permettant d'obtenir un utilisateur par son nom d'utilisateur.
+	 *
+	 * @param userName Le nom d'utilisateur de l'utilisateur à récupérer.
+	 * @return L'utilisateur correspondant au nom d'utilisateur spécifié.
+	 */
 	public User getUser(String userName) {
 		return internalUserMap.get(userName);
 	}
 
+
+	/**
+	 * Méthode permettant d'obtenir tous les utilisateurs.
+	 *
+	 * @return La liste de tous les utilisateurs.
+	 */
 	public List<User> getAllUsers() {
 		return internalUserMap.values().stream().collect(Collectors.toList());
 	}
@@ -82,6 +119,12 @@ public class TourGuideService {
 		}
 	}
 
+	/**
+	 * Méthode permettant d'obtenir les offres de voyage pour un utilisateur.
+	 *
+	 * @param user L'utilisateur pour lequel obtenir les offres de voyage.
+	 * @return La liste des offres de voyage disponibles pour l'utilisateur.
+	 */
 	public List<Provider> getTripDeals(User user) {
 		int cumulatativeRewardPoints = user.getUserRewards().stream().mapToInt(i -> i.getRewardPoints()).sum();
 		List<Provider> providers = tripPricer.getPrice(tripPricerApiKey, user.getUserId(),
@@ -91,10 +134,24 @@ public class TourGuideService {
 		return providers;
 	}
 
+
+	/**
+	 * Méthode permettant de suivre de manière asynchrone la localisation d'un utilisateur.
+	 *
+	 * @param user L'utilisateur à suivre.
+	 * @return Un CompletableFuture indiquant la fin du suivi de la localisation de l'utilisateur.
+	 */
 	public CompletableFuture<Void> trackUserLocationAsync(User user) {
 		return CompletableFuture.runAsync(() -> trackUserLocation(user), executorService);
 	}
 
+
+	/**
+	 * Méthode permettant de suivre la localisation d'un utilisateur.
+	 *
+	 * @param user L'utilisateur à suivre.
+	 * @return La localisation de l'utilisateur.
+	 */
 	public VisitedLocation trackUserLocation(User user) {
 		VisitedLocation visitedLocation = gpsUtil.getUserLocation(user.getUserId());
 		user.addToVisitedLocations(visitedLocation);
@@ -102,6 +159,13 @@ public class TourGuideService {
 		return visitedLocation;
 	}
 
+
+	/**
+	 * Méthode permettant d'obtenir les attractions à proximité d'une localisation visitée.
+	 *
+	 * @param visitedLocation La localisation visitée.
+	 * @return La liste des attractions à proximité de la localisation visitée.
+	 */
 	public List<Attraction> getNearByAttractions(VisitedLocation visitedLocation) {
 		List<Attraction> nearbyAttractions = new ArrayList<>();
 		for (Attraction attraction : gpsUtil.getAttractions()) {
@@ -113,6 +177,13 @@ public class TourGuideService {
 		return nearbyAttractions;
 	}
 
+	/**
+	 * Méthode permettant d'obtenir les cinq attractions les plus proches d'une localisation visitée par un utilisateur.
+	 *
+	 * @param visitedLocation La localisation visitée par l'utilisateur.
+	 * @param user            L'utilisateur.
+	 * @return La liste des cinq attractions les plus proches.
+	 */
 	public List<NearbyAttraction> getFiveNearestAttractions(VisitedLocation visitedLocation, User user){
 		List<Attraction> allAttractions = gpsUtil.getAttractions();
 		return allAttractions

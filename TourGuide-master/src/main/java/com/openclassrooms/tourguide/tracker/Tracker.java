@@ -11,7 +11,9 @@ import org.slf4j.LoggerFactory;
 
 import com.openclassrooms.tourguide.service.TourGuideService;
 import com.openclassrooms.tourguide.model.User;
-
+/**
+ * Cette classe est responsable du suivi continu de la localisation des utilisateurs.
+ */
 public class Tracker extends Thread {
 	private Logger logger = LoggerFactory.getLogger(Tracker.class);
 	private static final long trackingPollingInterval = TimeUnit.MINUTES.toSeconds(5);
@@ -19,6 +21,12 @@ public class Tracker extends Thread {
 	private final TourGuideService tourGuideService;
 	private boolean stop = false;
 
+
+	/**
+	 * Constructeur de Tracker prenant en paramètre le service TourGuide.
+	 *
+	 * @param tourGuideService Le service TourGuide utilisé pour effectuer le suivi de la localisation des utilisateurs.
+	 */
 	public Tracker(TourGuideService tourGuideService) {
 		this.tourGuideService = tourGuideService;
 
@@ -26,7 +34,7 @@ public class Tracker extends Thread {
 	}
 
 	/**
-	 * Assures to shut down the Tracker thread
+	 * Méthode permettant d'arrêter le suivi.
 	 */
 	public void stopTracking() {
 		stop = true;

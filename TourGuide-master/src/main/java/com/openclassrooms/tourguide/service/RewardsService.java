@@ -16,12 +16,16 @@ import gpsUtil.location.VisitedLocation;
 import rewardCentral.RewardCentral;
 import com.openclassrooms.tourguide.model.User;
 import com.openclassrooms.tourguide.model.UserReward;
-
+/**
+ * Classe responsable de la gestion des récompenses pour les utilisateurs.
+ * Elle calcule les récompenses pour les attractions visitées par les utilisateurs.
+ * Elle peut effectuer ces calculs de manière asynchrone pour améliorer les performances.
+ */
 @Service
 public class RewardsService {
     private static final double STATUTE_MILES_PER_NAUTICAL_MILE = 1.15077945;
 
-	// proximity in miles
+	// Proximité en miles
     private int defaultProximityBuffer = 10;
 	private int proximityBuffer = defaultProximityBuffer;
 	private int attractionProximityRange = 200;
@@ -30,7 +34,13 @@ public class RewardsService {
 
 	private final RewardCentral rewardsCentral;
 	private ExecutorService executorService = Executors.newFixedThreadPool(50);
-	
+
+	/**
+	 * Constructeur de RewardsService prenant en paramètres l'outil GPS (GpsUtil) et le centre de récompenses (RewardCentral).
+	 *
+	 * @param gpsUtil        L'outil GPS utilisé pour obtenir les attractions et calculer les distances.
+	 * @param rewardCentral  Le centre de récompenses utilisé pour obtenir les points de récompense pour une attraction donnée.
+	 */
 	public RewardsService(GpsUtil gpsUtil, RewardCentral rewardCentral) {
 		this.gpsUtil = gpsUtil;
 		this.rewardsCentral = rewardCentral;

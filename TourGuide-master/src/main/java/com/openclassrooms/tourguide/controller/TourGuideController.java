@@ -19,35 +19,47 @@ import tripPricer.Provider;
 @RestController
 public class TourGuideController {
 
+    // Injection de dépendance du service TourGuideService
 	@Autowired
 	TourGuideService tourGuideService;
-	
+
+
+    // Constructeur par défaut
+
+    /**
+     * Classe de contrôleur gérant les endpoints de l'API TourGuide.
+     * Cette classe est responsable de l'exposition des fonctionnalités de l'application TourGuide
+     * via des endpoints REST.
+     */
+
+    // Endpoint pour la racine de l'API
     @RequestMapping("/")
     public String index() {
         return "Greetings from TourGuide!";
     }
-    
+
+    // Endpoint pour obtenir la position d'un utilisateur par son nom d'utilisateur
     @RequestMapping("/getLocation") 
     public VisitedLocation getLocation(@RequestParam String userName) {
     	return tourGuideService.getUserLocation(getUser(userName));
     }
-
+    // Endpoint pour obtenir les attractions à proximité d'un utilisateur par son nom d'utilisateur
     @RequestMapping("/getNearbyAttractions") 
     public List<NearbyAttraction> getNearbyAttractions(@RequestParam String userName) {
     	VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));
     	return tourGuideService.getFiveNearestAttractions(visitedLocation, getUser(userName));
     }
-    
+    // Endpoint pour obtenir les récompenses d'un utilisateur par son nom d'utilisateur
     @RequestMapping("/getRewards") 
     public List<UserReward> getRewards(@RequestParam String userName) {
     	return tourGuideService.getUserRewards(getUser(userName));
     }
-       
+    // Endpoint pour obtenir les offres de voyage pour un utilisateur par son nom d'utilisateur
     @RequestMapping("/getTripDeals")
     public List<Provider> getTripDeals(@RequestParam String userName) {
     	return tourGuideService.getTripDeals(getUser(userName));
     }
-    
+    // Méthode utilitaire pour obtenir un utilisateur par son nom d'utilisateur
     private User getUser(String userName) {
     	return tourGuideService.getUser(userName);
     }
