@@ -57,6 +57,9 @@ public class RewardsService {
 		proximityBuffer = defaultProximityBuffer;
 	}
 
+
+	//La méthode calculateRewards() a été modifiée Pour améliorer les performances en utilisant un traitement
+	// parallèle pour calculer les récompenses des utilisateurs.
 	public void calculateRewards(User user) {
 		List<VisitedLocation> userLocations = new ArrayList<>(user.getVisitedLocations());
 		Set<String> userRewardAttractions = user.getUserRewards().stream()
@@ -119,7 +122,7 @@ public class RewardsService {
                                + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon1 - lon2));
 
         double nauticalMiles = 60 * Math.toDegrees(angle);
-        return STATUTE_MILES_PER_NAUTICAL_MILE * nauticalMiles;
+        return STATUTE_MILES_PER_NAUTICAL_MILE * nauticalMiles; //(simplifier)remplace double statuteMiles = STATUTE_MILES_PER_NAUTICAL_MILE * nauticalMiles;return statuteMiles;
 	}
 
 
