@@ -101,11 +101,19 @@ public class TestTourGuideService {
 		User user = new User(UUID.randomUUID(), "jon", "000", "jon@tourGuide.com");
 		VisitedLocation visitedLocation = tourGuideService.trackUserLocation(user);
 
-		List<NearbyAttraction> attractions = tourGuideService.getFiveNearestAttractions(visitedLocation, user);// Modification 2: Appel de la méthode modifiée
+		// Modification 2: getNearbyAttractions() a
+		// été renommée en getFiveNearestAttractions(VisitedLocation visitedLocation, User user)
+//Pour indiquer clairement que cette méthode renvoie les cinq attractions touristiques les plus
+// proches, ce qui améliore la lisibilité du code.
+		List<NearbyAttraction> attractions = tourGuideService.getFiveNearestAttractions(visitedLocation, user);
+
 
 		tourGuideService.tracker.stopTracking();
 
-		assertEquals(5, attractions.size());  // Modification 3: Assertion modifiée
+		//Pour tester explicitement si la méthode renvoie effectivement cinq attractions
+		// touristiques proches, garantissant ainsi son bon fonctionnement.
+
+		assertEquals(5, attractions.size());  // Modification 3: Assertion modifiée  assertEquals(5, attractions.size())
 	}
 
 	@Test
@@ -120,8 +128,10 @@ public class TestTourGuideService {
 		List<Provider> providers = tourGuideService.getTripDeals(user);
 
 		tourGuideService.tracker.stopTracking();
+//Pour tester explicitement si la méthode renvoie effectivement cinq offres de voyages,
+// ce qui assure son bon fonctionnement conformément aux spécifications fonctionnelles
 
-		assertEquals(5, providers.size()); // Modification 4: Assertion modifiée
+		assertEquals(5, providers.size()); // Modification 4: Assertion modifiée assertEquals(5, providers.size())
 	}
 
 }
