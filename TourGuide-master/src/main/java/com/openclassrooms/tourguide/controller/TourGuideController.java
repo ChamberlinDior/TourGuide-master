@@ -50,6 +50,8 @@ public class TourGuideController {
     	return tourGuideService.getFiveNearestAttractions(visitedLocation, getUser(userName));
     }
     // Endpoint pour obtenir les récompenses d'un utilisateur par son nom d'utilisateur
+
+    //Pour utiliser la classe NearbyAttraction qui est maintenant utilisée pour représenter les attractions touristiques proches.
     @RequestMapping("/getRewards") 
     public List<UserReward> getRewards(@RequestParam String userName) {
     	return tourGuideService.getUserRewards(getUser(userName));
