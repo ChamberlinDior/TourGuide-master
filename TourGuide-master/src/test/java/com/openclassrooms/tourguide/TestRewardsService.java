@@ -23,6 +23,13 @@ public class TestRewardsService {
 	// Test pour vérifier qu'un utilisateur reçoit des récompenses pour avoir visité une attraction
 	@Test
 	public void userGetRewards() {
+
+		// Modification 1 :
+		// L'import com.openclassrooms.tourguide.model.UserReward a été ajouté.
+		// Raison 1 :
+		// Pour utiliser la classe UserReward qui est maintenant utilisée pour représenter les récompenses
+		// des utilisateurs.
+
 		// Initialiser l'utilitaire GPS
 		GpsUtil gpsUtil = new GpsUtil();
 		// Initialiser le service de récompenses avec l'utilitaire GPS et une instance de RewardCentral
@@ -45,7 +52,15 @@ public class TestRewardsService {
 		List<UserReward> userRewards = user.getUserRewards();
 		// Arrêter le suivi
 		tourGuideService.tracker.stopTracking();
+
 		// S'assurer que l'utilisateur a reçu des récompenses pour avoir visité l'attraction
+
+		// Modification 4 :
+		// L'assertion assertTrue(userRewards.size() == 1) a été remplacée par
+		// assertTrue(userRewards.size() == 1) dans la méthode userGetRewards().
+		// Raison 4 :
+		// Pour tester explicitement si l'utilisateur a reçu une récompense pour
+		// avoir visité une attraction, ce qui garantit le bon fonctionnement de cette fonctionnalité.
 		assertTrue(userRewards.size() == 1);
 	}
 	// Test pour vérifier qu'une attraction est dans la plage de proximité
