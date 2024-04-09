@@ -43,27 +43,27 @@ public class Tracker extends Thread {
 
 	@Override
 	public void run() {
-		StopWatch stopWatch = new StopWatch();
-		while (true) {
-			if (Thread.currentThread().isInterrupted() || stop) {
-				logger.debug("Tracker stopping");
-				break;
+		StopWatch stopWatch = new StopWatch(); // Crée un chronomètre pour mesurer le temps d'exécution
+		while (true) { // Boucle infinie pour exécuter le suivi en continu
+			if (Thread.currentThread().isInterrupted() || stop) { // Vérifie si le thread a été interrompu ou si le suivi doit s'arrêter
+				logger.debug("Tracker stopping"); // Journalise l'arrêt du suivi
+				break; // Sort de la boucle
 			}
 
-			List<User> users = tourGuideService.getAllUsers();
-			logger.debug("Begin Tracker. Tracking " + users.size() + " users.");
-			stopWatch.start();
-			users.forEach(u -> tourGuideService.trackUserLocation(u));
-			stopWatch.stop();
-			logger.debug("Tracker Time Elapsed: " + TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()) + " seconds.");
-			stopWatch.reset();
+			List<User> users = tourGuideService.getAllUsers(); // Récupère la liste de tous les utilisateurs
+			logger.debug("Begin Tracker. Tracking " + users.size() + " users."); // Journalise le début du suivi avec le nombre d'utilisateurs
+			stopWatch.start(); // Démarre le chronomètre
+			users.forEach(u -> tourGuideService.trackUserLocation(u)); // Parcourt chaque utilisateur et suit sa localisation
+			stopWatch.stop(); // Arrête le chronomètre
+			logger.debug("Tracker Time Elapsed: " + TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()) + " seconds."); // Journalise le temps écoulé pour le suivi
+			stopWatch.reset(); // Réinitialise le chronomètre pour la prochaine itération
 			try {
-				logger.debug("Tracker sleeping");
-				TimeUnit.SECONDS.sleep(trackingPollingInterval);
-			} catch (InterruptedException e) {
-				break;
+				logger.debug("Tracker sleeping"); // Journalise que le suivi est en pause
+				TimeUnit.SECONDS.sleep(trackingPollingInterval); // Met le thread en pause pendant un intervalle de temps
+			} catch (InterruptedException e) { // Gère les interruptions du sommeil
+				break; // Sort de la boucle
 			}
 		}
-
 	}
+
 }
