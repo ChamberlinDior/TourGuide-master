@@ -32,6 +32,9 @@ import tripPricer.TripPricer;
  * Elle offre des fonctionnalités telles que le suivi de la localisation des utilisateurs, le calcul des récompenses,
  * la recherche d'attractions à proximité, etc.
  */
+
+//L'import com.openclassrooms.tourguide.model.NearbyAttraction a été ajouté.Pour utiliser la classe NearbyAttraction qui
+// est maintenant utilisée pour représenter les attractions touristiques proches.
 @Service
 public class TourGuideService {
 	private Logger logger = LoggerFactory.getLogger(TourGuideService.class);
@@ -184,6 +187,9 @@ public class TourGuideService {
 	 * @param user            L'utilisateur.
 	 * @return La liste des cinq attractions les plus proches.
 	 */
+
+	//La méthode getFiveNearestAttractions() a été ajoutée Pour répondre aux spécifications fonctionnelles qui
+	// exigent que la méthode retourne les cinq attractions les plus proches
 	public List<NearbyAttraction> getFiveNearestAttractions(VisitedLocation visitedLocation, User user){
 		List<Attraction> allAttractions = gpsUtil.getAttractions();
 		return allAttractions
