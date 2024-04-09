@@ -101,11 +101,11 @@ public class TestTourGuideService {
 		User user = new User(UUID.randomUUID(), "jon", "000", "jon@tourGuide.com");
 		VisitedLocation visitedLocation = tourGuideService.trackUserLocation(user);
 
-		List<NearbyAttraction> attractions = tourGuideService.getFiveNearestAttractions(visitedLocation, user);
+		List<NearbyAttraction> attractions = tourGuideService.getFiveNearestAttractions(visitedLocation, user);// Modification 2: Appel de la méthode modifiée
 
 		tourGuideService.tracker.stopTracking();
 
-		assertEquals(5, attractions.size());
+		assertEquals(5, attractions.size());  // Modification 3: Assertion modifiée
 	}
 
 	@Test

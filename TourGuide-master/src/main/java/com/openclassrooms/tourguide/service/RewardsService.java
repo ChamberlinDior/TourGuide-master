@@ -73,7 +73,7 @@ public class RewardsService {
 						}
 					}
 				})
-		);
+ );
 	}
 
 	public CompletableFuture<Void> calculateRewardsAsyncList(List<User> allUsers){
