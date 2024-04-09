@@ -24,28 +24,30 @@ import com.openclassrooms.tourguide.model.User;
 
 public class TestPerformance {
 
+
 	/*
-	 * A note on performance improvements:
-	 * 
-	 * The number of users generated for the high volume tests can be easily
-	 * adjusted via this method:
-	 * 
+	 * Remarque sur les améliorations de performances :
+	 *
+	 * Le nombre d'utilisateurs générés pour les tests à volume élevé peut être facilement
+	 * ajusté via cette méthode :
+	 *
 	 * InternalTestHelper.setInternalUserNumber(100000);
-	 * 
-	 * 
-	 * These tests can be modified to suit new solutions, just as long as the
-	 * performance metrics at the end of the tests remains consistent.
-	 * 
-	 * These are performance metrics that we are trying to hit:
-	 * 
-	 * highVolumeTrackLocation: 100,000 users within 15 minutes:
+	 *
+	 *
+	 * Ces tests peuvent être modifiés pour convenir à de nouvelles solutions, tant que les
+	 * métriques de performances à la fin des tests restent cohérentes.
+	 *
+	 * Voici les métriques de performances que nous essayons d'atteindre :
+	 *
+	 * highVolumeTrackLocation : 100 000 utilisateurs en 15 minutes :
 	 * assertTrue(TimeUnit.MINUTES.toSeconds(15) >=
 	 * TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()));
 	 *
-	 * highVolumeGetRewards: 100,000 users within 20 minutes:
+	 * highVolumeGetRewards : 100 000 utilisateurs en 20 minutes :
 	 * assertTrue(TimeUnit.MINUTES.toSeconds(20) >=
 	 * TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()));
 	 */
+
 
 	@Test
 	public void highVolumeTrackLocation() throws ExecutionException, InterruptedException {
