@@ -15,7 +15,7 @@ import com.openclassrooms.tourguide.model.User;
 import com.openclassrooms.tourguide.model.UserReward;
 
 import tripPricer.Provider;
-
+//L'import NearbyAttraction qui est maintenant utilisée pour représenter les attractions touristiques proches.
 @RestController
 public class TourGuideController {
 
