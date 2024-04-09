@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.List;
 import java.util.UUID;
 
-import com.openclassrooms.tourguide.model.NearbyAttraction;
+import com.openclassrooms.tourguide.model.NearbyAttraction;// Modification 1: Import de NearbyAttraction
 import org.junit.jupiter.api.Test;
 
 import gpsUtil.GpsUtil;
@@ -121,7 +121,7 @@ public class TestTourGuideService {
 
 		tourGuideService.tracker.stopTracking();
 
-		assertEquals(5, providers.size());
+		assertEquals(5, providers.size()); // Modification 4: Assertion modifiée
 	}
 
 }
